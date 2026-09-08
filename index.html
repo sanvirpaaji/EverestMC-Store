@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The official EverestMC Minecraft store.">
+  <title>EverestMC Store</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="navbar">
+    <a class="brand" href="#home" aria-label="EverestMC Store home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64" role="img">
+          <path d="M7 52 28 16l9 15 6-10 14 31H7Z"></path>
+          <path d="m28 16 9 15 6-10 7 15-13-7-9 8-8-7 8-14Z" class="snow"></path>
+        </svg>
+      </span>
+      <span>EVEREST<span class="accent">MC</span></span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#ranks">Ranks</a>
+      <a href="#market">Everest Market</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <a class="discord-btn" href="https://discord.com/" target="_blank" rel="noopener">Discord</a>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <div class="eyebrow"><span class="pulse"></span> EVERESTMC STORE</div>
+        <h1>Reach the<br><span>summit.</span></h1>
+        <p class="hero-copy">
+          The official EverestMC store is being prepared.
+          Ranks, cosmetics, and the Everest Market are coming soon.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#ranks">View ranks <span>→</span></a>
+          <a class="secondary-btn" href="#market">Explore the market</a>
+        </div>
+      </div>
+
+      <div class="mountain-art" aria-hidden="true">
+        <svg viewBox="0 0 900 520" preserveAspectRatio="xMidYMax meet">
+          <defs>
+            <linearGradient id="mountainFade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="currentColor" stop-opacity=".20"/>
+              <stop offset="100%" stop-color="currentColor" stop-opacity=".02"/>
+            </linearGradient>
+          </defs>
+          <path d="M0 520 190 270 300 390 455 120 665 390 755 285 900 520Z" fill="url(#mountainFade)"/>
+          <path d="M190 270 300 390 455 120 665 390 755 285 900 520H0Z" fill="none" stroke="currentColor" stroke-opacity=".25" stroke-width="2"/>
+          <path d="m455 120 56 121-57-30-42 33Z" fill="currentColor" opacity=".35"/>
+          <path d="m300 390 155-270-88 208Z" fill="currentColor" opacity=".08"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="section" id="ranks">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">THE CLIMB</div>
+          <h2>Choose your <span>rank.</span></h2>
+        </div>
+        <p>Store purchases are currently unavailable while we finish building the EverestMC experience.</p>
+      </div>
+
+      <div class="cards">
+        <article class="rank-card featured">
+          <div class="card-top">
+            <span class="rank-number">01</span>
+            <span class="coming">COMING SOON</span>
+          </div>
+          <div class="rank-icon">S</div>
+          <h3>Sherpa</h3>
+          <p>The grounded starting rank. Tough, capable, and ready for the climb.</p>
+          <div class="card-bottom">
+            <span>Coming soon</span>
+            <button disabled>Unavailable</button>
+          </div>
+        </article>
+
+        <article class="rank-card">
+          <div class="card-top">
+            <span class="rank-number">02</span>
+            <span class="coming">COMING SOON</span>
+          </div>
+          <div class="rank-icon ice">I</div>
+          <h3>Icefang</h3>
+          <p>For climbers who have survived the Khumbu Icefall and kept moving upward.</p>
+          <div class="card-bottom">
+            <span>Coming soon</span>
+            <button disabled>Unavailable</button>
+          </div>
+        </article>
+
+        <article class="rank-card locked">
+          <div class="card-top">
+            <span class="rank-number">03</span>
+            <span class="coming">COMING SOON</span>
+          </div>
+          <div class="rank-icon">?</div>
+          <h3>More ranks</h3>
+          <p>Higher peaks are waiting. More EverestMC ranks will be revealed soon.</p>
+          <div class="card-bottom">
+            <span>Stay tuned</span>
+            <button disabled>Locked</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="market section" id="market">
+      <div class="market-box">
+        <div class="market-copy">
+          <div class="eyebrow">EVEREST MARKET</div>
+          <h2>A living economy.<br><span>Built for EverestMC.</span></h2>
+          <p>
+            Track the server economy, discover market trends, and watch prices move
+            in real time. The Everest Market is planned as a core part of the server.
+          </p>
+          <span class="market-status"><span class="pulse"></span> MARKET IN DEVELOPMENT</span>
+        </div>
+        <div class="chart">
+          <div class="chart-grid"></div>
+          <svg viewBox="0 0 620 260" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="currentColor" stop-opacity=".24"/>
+                <stop offset="100%" stop-color="currentColor" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path class="chart-fill" d="M0 220 L70 190 L130 205 L190 145 L245 170 L310 110 L365 130 L430 78 L480 100 L540 52 L620 72 L620 260 L0 260Z"/>
+            <path class="chart-line" d="M0 220 L70 190 L130 205 L190 145 L245 170 L310 110 L365 130 L430 78 L480 100 L540 52 L620 72"/>
+          </svg>
+          <div class="chart-labels"><span>LIVE MARKET</span><span>COMING SOON</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section faq" id="faq">
+      <div class="section-heading">
+        <div>
+          <div class="eyebrow">QUESTIONS</div>
+          <h2>Frequently asked.</h2>
+        </div>
+      </div>
+
+      <div class="faq-list">
+        <details open>
+          <summary>When will the store open?<span>+</span></summary>
+          <p>We are still building the store. Check the site and EverestMC Discord for launch announcements.</p>
+        </details>
+        <details>
+          <summary>Will purchases work on Minecraft?<span>+</span></summary>
+          <p>Yes. The final store will be designed around Minecraft usernames and EverestMC's in-game ranks and items.</p>
+        </details>
+        <details>
+          <summary>What is the Everest Market?<span>+</span></summary>
+          <p>It is EverestMC's planned live server economy and market experience, with prices and trends displayed on the web.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div>
+        <div class="eyebrow">EVERESTMC</div>
+        <h2>The climb starts here.</h2>
+      </div>
+      <a class="primary-btn" href="https://discord.com/" target="_blank" rel="noopener">Join Discord <span>→</span></a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="brand footer-brand">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 64 64"><path d="M7 52 28 16l9 15 6-10 14 31H7Z"></path><path d="m28 16 9 15 6-10 7 15-13-7-9 8-8-7 8-14Z" class="snow"></path></svg>
+      </span>
+      <span>EVEREST<span class="accent">MC</span></span>
+    </div>
+    <span>© 2026 EverestMC. All rights reserved.</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
