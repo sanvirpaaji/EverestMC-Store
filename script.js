@@ -46,15 +46,24 @@ async function openCheckout(r) {
 
 /* ---------- Live market ---------- */
 const DEMO = [{ id: 1, name: "Summit Mining Co", owner: "Steve", treasury: 5200, totalShares: 100, sharePrice: 52, members: 4 }, { id: 2, name: "Icefall Logistics", owner: "Alex", treasury: 1800, totalShares: 100, sharePrice: 18, members: 2 }];
-async function get(url) { const r = await fetch(url, { signal: AbortSignal.timeout(6000), cache: "no-store" }); if (!r.ok) throw 0; return r.json(); }
+async function get(url) {
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 8000);
+  try {
+    const r = await fetch(url + (url.startsWith("http") ? "?t=" + Date.now() : ""), { signal: ctl.signal });
+    if (!r.ok) throw new Error("HTTP " + r.status);
+    return await r.json();
+  } finally { clearTimeout(t); }
+}
 async function loadMarket() {
-  let data = null, live = false, updated = null;
+  let data = null, live = false, updated = null, src = "";
   if (location.search.includes("demo")) data = DEMO;
   else for (const [url, isLive] of [[C.apiUrl, true], [C.snapshotUrl, false], ["data/companies.json", false]]) {
     if (!url) continue;
-    try { data = await get(url); live = isLive; break; } catch {}
+    try { data = await get(url); live = isLive; src = url; break; } catch (e) { console.warn("Market source failed:", url, e); }
   }
-  if (data && !Array.isArray(data)) { updated = data.updated ? new Date(data.updated) : null; data = data.companies; }
+  if (data && !Array.isArray(data)) { updated = data.updated ? new Date(String(data.updated).replace(/(\.\d{3})\d+/, "$1")) : null; data = data.companies; }
+  if (src === "data/companies.json" && data && !data.length) data = null; // empty local placeholder = no real data
+  if (updated && isNaN(updated)) updated = null;
   render(data, live, updated);
 }
 function render(data, live, updated) {
