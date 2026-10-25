@@ -48,17 +48,19 @@ async function openCheckout(r) {
 const DEMO = [{ id: 1, name: "Summit Mining Co", owner: "Steve", treasury: 5200, totalShares: 100, sharePrice: 52, members: 4 }, { id: 2, name: "Icefall Logistics", owner: "Alex", treasury: 1800, totalShares: 100, sharePrice: 18, members: 2 }];
 async function get(url) { const r = await fetch(url, { signal: AbortSignal.timeout(6000), cache: "no-store" }); if (!r.ok) throw 0; return r.json(); }
 async function loadMarket() {
-  let data, live = false;
-  try {
-    if (location.search.includes("demo")) data = DEMO;
-    else if (C.apiUrl) { data = await get(C.apiUrl); live = true; }
-    else data = await get("data/companies.json");
-  } catch { try { data = await get("data/companies.json"); } catch { data = null; } }
-  render(data, live);
+  let data = null, live = false, updated = null;
+  if (location.search.includes("demo")) data = DEMO;
+  else for (const [url, isLive] of [[C.apiUrl, true], [C.snapshotUrl, false], ["data/companies.json", false]]) {
+    if (!url) continue;
+    try { data = await get(url); live = isLive; break; } catch {}
+  }
+  if (data && !Array.isArray(data)) { updated = data.updated ? new Date(data.updated) : null; data = data.companies; }
+  render(data, live, updated);
 }
-function render(data, live) {
-  $("#dot").className = "dot " + (live ? "live" : "off");
-  $("#stat").textContent = live ? "Live - updates every 30s" : (data ? "Showing last saved snapshot (server API not connected)" : "Market data unavailable right now");
+function render(data, live, updated) {
+  const age = updated ? Math.round((Date.now() - updated) / 60000) : null, fresh = live || (age !== null && age < 30);
+  $("#dot").className = "dot " + (fresh ? "live" : "off");
+  $("#stat").textContent = live ? "Live - updates every 30s" : age !== null ? "Updated " + (age < 1 ? "just now" : age + " min ago") + (fresh ? "" : " (server may be offline)") : (data ? "Showing a saved snapshot" : "Market data unavailable right now");
   const rows = $("#rows"), stats = $("#stats"); rows.replaceChildren(); stats.replaceChildren();
   if (!data || !data.length) { const tr = el("tr"), td = el("td", "No companies to show yet.", "empty"); td.colSpan = 7; tr.append(td); rows.append(tr); return; }
   const top = data.reduce((a, b) => b.sharePrice > a.sharePrice ? b : a);
