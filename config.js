@@ -19,16 +19,17 @@ window.EVEREST = {
 
   // ===== RANKS: name / price / blurb. Add or delete freely (then fix the `v` lists in `features` to match). =====
   ranks: [
-    { id: "elite",    name: "Elite",    price: "29.99", blurb: "Your first step above base camp." },
-    { id: "immortal", name: "Immortal", price: "49.99", blurb: "For climbers who never turn back." },
-    { id: "everest",  name: "Everest",  price: "59.99", blurb: "The summit rank. Nothing sits higher." }
+    { id: "elite",    name: "Elite",    price: "2.99", blurb: "Rise above the rest and claim your place among the elite." },
+    { id: "immortal", name: "Immortal", price: "4.99", blurb: "For the legends who stand above even the greatest climbers." },
+    { id: "everest",  name: "Everest",  price: "6.99", blurb: "Reach the summit. Claim the ultimate rank on EverestMC." }
   ],
 
   // ===== RANK FEATURES (placeholders: REPLACE WITH YOUR REAL PERKS) =====
   // One row per feature. `v` has one value per rank, in the same order as `ranks` above:
   // true = included, false = not included, "text" = included with a detail (shown on cards + comparison table).
   features: [
-    { name: "Chat prefix & name color", v: ["Elite", "Immortal", "Everest"] },
+    { name: "Rank tag", v: ["Elite", "Immortal", "Everest"] },
+    { name: "Features", v: ["Basic features", "Variety of features", "All features"] },
     { name: "Colored chat",             v: [true, true, true] },
     { name: "Homes",                    v: ["3", "6", "10"] },
     { name: "Monthly crate keys",       v: ["2 Common", "2 Rare", "2 Epic"] },
