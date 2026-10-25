@@ -2,7 +2,7 @@
  // ===== EDIT ME =====
 window.EVEREST = {
   // Set to true ONLY after you have a PayPal account and have filled in paypalClientId (or paypalMe) below.
-  checkoutEnabled: true,
+  checkoutEnabled: false,
   siteName: "EVERESTMC",
   discordUrl: "https://discord.everestmc.net/", // your invite link
 
