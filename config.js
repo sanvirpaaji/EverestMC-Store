@@ -3,7 +3,7 @@ window.EVEREST = {
   // Set to true ONLY after you have a PayPal account and have filled in paypalClientId (or paypalMe) below.
   checkoutEnabled: false,
   siteName: "EVERESTMC",
-  discordUrl: "https://discord.com/",          // your invite link
+  discordUrl: "https://discord.everestmc.net/",          // your invite link
   // Live market API from the plugin. MUST be https:// (see README).
   snapshotUrl: "https://raw.githubusercontent.com/sanvirpaaji/EverestMC-Store/market-data/companies.json", // filled by the plugin (no port needed)
   apiUrl: "",                                   // e.g. "https://api.everestmc.net/api/companies"
