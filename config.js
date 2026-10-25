@@ -21,21 +21,21 @@ window.EVEREST = {
     {
       id: "elite",
       name: "Elite",
-      price: "29.99",
+      price: "2.99",
       blurb: "Rise above the rest and claim your place among the elite.",
       perks: ["Elite tag & basic features"]
     },
     {
       id: "immortal",
       name: "Immortal",
-      price: "49.99",
+      price: "4.99",
       blurb: "For the legends who stand above even the greatest climbers.",
       perks: ["Immortal tag & variety of features", "Everything in Prestige"]
     },
     {
       id: "everest",
       name: "Everest",
-      price: "59.99",
+      price: "6.99",
       blurb: "Reach the summit. Claim the ultimate rank on EverestMC.",
       perks: ["Everest tag & all features", "Everything in Immortal"]
     }
