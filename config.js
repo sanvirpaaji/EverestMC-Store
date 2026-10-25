@@ -12,7 +12,7 @@ window.EVEREST = {
   currency: "USD",
   currencySymbol: "$",
   paypalClientId: "", // PayPal "Live" Client ID (public, safe here). Empty = PayPal.Me fallback
-  paypalMe: "", // fallback, e.g. "yourhandle"
+  paypalMe: "sanvir", // fallback, e.g. "yourhandle"
 
   // ===== RANKS: edit name / price / blurb / perks freely, add or delete blocks. =====
   // id = short lowercase code that shows up in PayPal orders (don't use spaces).
