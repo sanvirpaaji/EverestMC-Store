@@ -1,41 +1,37 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EverestMC Store</title>
-<meta name="description" content="The official EverestMC Minecraft store: ranks and the live Everest Market.">
+<title>EverestMC Store | Ranks, Crate Keys & Coins</title>
+<meta name="description" content="The official EverestMC Minecraft store. Buy ranks, crate keys and coins, and follow the live Everest Market economy.">
+<link rel="canonical" href="https://store.everestmc.net/">
 <meta name="theme-color" content="#030708">
-<link rel="icon" href="favicon.png"><meta property="og:image" content="logo.webp">
+<meta property="og:type" content="website"><meta property="og:title" content="EverestMC Store | Ranks, Crate Keys & Coins"><meta property="og:description" content="The official EverestMC Minecraft store. Buy ranks, crate keys and coins, and follow the live Everest Market economy.">
+<meta property="og:url" content="https://store.everestmc.net/"><meta property="og:image" content="https://store.everestmc.net/logo.webp"><meta name="twitter:card" content="summary">
+<link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head><body>
-<div class="bg"></div>
-<header><a class="brand" href="#home"><img src="logo.webp" alt="" width="34" height="34">EVERESTMC</a>
-<nav><a href="#ranks">Ranks</a><a href="#market">Everest Market</a><a href="#faq">FAQ</a><a class="btn sm" id="dc1" href="#">Discord</a></nav></header>
+<header><a class="brand" href="index.html"><img src="logo.webp" alt="" width="32" height="32">EVERESTMC</a>
+<nav><a href="index.html" class="cur">Home</a><a href="ranks.html">Ranks</a><a href="store.html">Store</a><a href="market.html">Market</a><a href="faq.html">FAQ</a><a class="btn sm dc" href="#">Discord</a></nav></header>
 <main>
-<section id="home" class="hero"><img class="mark" src="logo.webp" alt="EverestMC logo" width="220" height="220">
+<section class="hero"><svg class="peaks" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#19f0cc" stop-opacity=".16"/><stop offset="1" stop-color="#030708" stop-opacity="0"/></linearGradient></defs>
+<path fill="url(#g1)" d="M0 420V260l150-90 120 70 190-170 210 190 140-100 190 150 130-90 140 100 170-110v320z"/>
+<path fill="#071213" d="M0 420V330l180-80 150 60 220-130 190 140 170-80 200 100 160-70 170 90v110z"/>
+<path fill="#030708" d="M0 420V380l260-60 240 50 260-90 230 80 250-40v100z"/></svg>
+<div class="hin"><img class="mark" src="logo.webp" alt="EverestMC logo" width="130" height="130">
 <p class="eyebrow">EVERESTMC STORE</p><h1>Reach the <span>summit.</span></h1>
-<p class="lead">Ranks for the climb, and a living economy you can watch move in real time.</p>
-<p class="cta"><a class="btn" href="#ranks">View ranks</a><a class="btn ghost" href="#market">Live market</a></p></section>
-
-<section id="ranks"><p class="eyebrow">THE CLIMB</p><h2>Choose your rank.</h2><div class="grid" id="rankGrid"></div></section>
-
-<section id="market"><p class="eyebrow">EVEREST MARKET</p><h2>A living economy. Built for EverestMC.</h2>
-<div class="status"><span id="dot" class="dot"></span><span id="stat">Connecting…</span></div>
-<div class="stats" id="stats"></div>
-<div class="wrap"><table><thead><tr><th>#</th><th>Company</th><th>Owner</th><th>Members</th><th>Shares</th><th>Share price</th><th>Treasury</th></tr></thead><tbody id="rows"></tbody></table></div></section>
-
-<section id="faq"><p class="eyebrow">QUESTIONS</p><h2>Frequently asked.</h2>
-<details><summary>How do I get my rank?</summary><p>Pay with PayPal using your exact Minecraft username. Ranks are applied to that username after payment is confirmed.</p></details>
-<details><summary>Is my username case-sensitive?</summary><p>Double-check spelling before paying; ranks are applied to exactly what you enter.</p></details>
-<details><summary>What is the Everest Market?</summary><p>Players found companies, sell shares and trade. Share price is a company's treasury divided by its total shares, shown live above.</p></details></section>
-
-<section class="final"><p class="eyebrow">EVERESTMC</p><h2>The climb starts here.</h2><a class="btn" id="dc2" href="#">Join Discord</a></section>
+<p class="lead">Ranks, crate keys and coins for the climb, and a living economy you can watch in real time.</p>
+<div class="ips"></div><p class="pl c"><span class="dot pdot"></span><span class="players"></span></p>
+<p class="cta"><a class="btn" href="ranks.html">View ranks</a><a class="btn ghost" href="store.html">Browse the store</a></p></div></section>
+<section><p class="eyebrow">THE CLIMB</p><h2>Pick your path.</h2><div class="grid g3">
+<a class="card lc reveal" href="ranks.html"><h3>Ranks</h3><p>Compare every rank and everything it unlocks, side by side.</p><span class="go">Explore →</span></a>
+<a class="card lc reveal" href="store.html"><h3>Store</h3><p>Crate keys, coins and bundles for every kind of player.</p><span class="go">Explore →</span></a>
+<a class="card lc reveal" href="market.html"><h3>Everest Market</h3><p>Watch companies, shares and prices move in real time.</p><span class="go">Explore →</span></a>
+</div></section>
+<section><p class="eyebrow">RANKS</p><h2>Start your ascent.</h2><div class="chips" id="rankPreview"></div></section>
+<section class="final"><p class="eyebrow">EVERESTMC</p><h2>The climb starts here.</h2><a class="btn dc" href="#">Join Discord</a></section>
 </main>
-<footer><img src="logo.webp" alt="" width="28" height="28"> © 2026 EverestMC. Not affiliated with Mojang or Microsoft.</footer>
-
-<dialog id="co"><form method="dialog"><button class="x" aria-label="Close">×</button></form>
-<h3 id="coTitle"></h3><label>Minecraft username<input id="user" maxlength="16" autocomplete="off" placeholder="Steve"></label>
-<p class="err" id="err"></p><div id="pp"></div><p class="ok" id="ok"></p></dialog>
+<footer><div class="ips small"></div><div class="fl"><img src="logo.webp" alt="" width="24" height="24"><span>© 2026 EverestMC. Not affiliated with Mojang or Microsoft.</span><span class="pl"><span class="dot pdot"></span><span class="players"></span></span></div></footer>
 <script src="config.js"></script><script src="script.js"></script>
 </body></html>

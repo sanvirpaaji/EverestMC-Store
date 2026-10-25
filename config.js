@@ -3,20 +3,64 @@ window.EVEREST = {
   // Set to true ONLY after you have a PayPal account and have filled in paypalClientId (or paypalMe) below.
   checkoutEnabled: false,
   siteName: "EVERESTMC",
-  discordUrl: "https://discord.everestmc.net/",          // your invite link
-  // Live market API from the plugin. MUST be https:// (see README).
-  snapshotUrl: "https://raw.githubusercontent.com/sanvirpaaji/EverestMC-Store/market-data/companies.json", // filled by the plugin (no port needed)
-  apiUrl: "",                                   // e.g. "https://api.everestmc.net/api/companies"
+  javaIp: "play.everestmc.net",
+  javaNote: "1.8+",
+  eaglerIp: "eagler.everestmc.net",
+  eaglerNote: "1.12.2",
+  discordUrl: "https://discord.everestmc.net/",
+  deliveryNote: "Purchases are applied to your Minecraft username after payment is confirmed. Need help? Open a ticket on Discord.",
+  // Market data: the plugin saves it to GitHub; leave apiUrl empty (Folium can't open ports).
+  snapshotUrl: "https://raw.githubusercontent.com/sanvirpaaji/EverestMC-Store/market-data/companies.json",
+  apiUrl: "",
   currency: "USD",
   currencySymbol: "$",
   paypalClientId: "",                           // PayPal "Live" Client ID (public, safe here). Empty = PayPal.Me fallback
   paypalMe: "",                                 // fallback, e.g. "yourhandle"
-  // ===== RANKS: edit name / price / blurb / perks freely, add or delete blocks. =====
-  // id = short lowercase code that shows up in PayPal orders (don't use spaces).
-  // soon: true = shows a locked "Coming soon" card instead of a buy button.
+
+  // ===== RANKS: name / price / blurb. Add or delete freely (then fix the `v` lists in `features` to match). =====
   ranks: [
-    { id: "sherpa",  name: "Sherpa",  price: "9.99",  blurb: "The grounded starting rank. Tough, capable, ready for the climb.", perks: ["Sherpa tag & chat color", "Starter perks"] },
-    { id: "icefang", name: "Icefang", price: "19.99", blurb: "For climbers who survived the Khumbu Icefall and kept moving.",    perks: ["Icefang tag & chat color", "Everything in Sherpa"] },
-    { id: "more",    name: "More ranks", price: "", soon: true, blurb: "Higher peaks are waiting. More ranks will be revealed soon.", perks: [] }
+    { id: "elite",    name: "Elite",    price: "29.99", blurb: "Your first step above base camp." },
+    { id: "immortal", name: "Immortal", price: "49.99", blurb: "For climbers who never turn back." },
+    { id: "everest",  name: "Everest",  price: "59.99", blurb: "The summit rank. Nothing sits higher." }
+  ],
+
+  // ===== RANK FEATURES (placeholders: REPLACE WITH YOUR REAL PERKS) =====
+  // One row per feature. `v` has one value per rank, in the same order as `ranks` above:
+  // true = included, false = not included, "text" = included with a detail (shown on cards + comparison table).
+  features: [
+    { name: "Chat prefix & name color", v: ["Elite", "Immortal", "Everest"] },
+    { name: "Colored chat",             v: [true, true, true] },
+    { name: "Homes",                    v: ["3", "6", "10"] },
+    { name: "Monthly crate keys",       v: ["2 Common", "2 Rare", "2 Epic"] },
+    { name: "Rank kit",                 v: ["Elite kit", "Immortal kit", "Everest kit"] },
+    { name: "Portable ender chest",     v: [true, true, true] },
+    { name: "Fly at spawn",             v: [false, true, true] },
+    { name: "Priority support",         v: [false, true, true] },
+    { name: "Exclusive cosmetics",      v: [false, false, true] },
+    { name: "Exclusive Everest title",  v: [false, false, true] }
+  ],
+
+  // ===== STORE CATALOG (ALL PLACEHOLDERS: names, sizes and prices). id = no spaces. =====
+  catalog: [
+    { id: "keys", name: "Crate Keys", items: [
+      { id: "key-common5",   name: "Common Key x5",     price: "2.99",  blurb: "Five keys for the Common crate." },
+      { id: "key-common15",  name: "Common Key x15",    price: "7.99",  blurb: "Fifteen Common keys, better value." },
+      { id: "key-rare5",     name: "Rare Key x5",       price: "4.99",  blurb: "Five keys for the Rare crate." },
+      { id: "key-rare15",    name: "Rare Key x15",      price: "12.99", blurb: "Fifteen Rare keys, better value." },
+      { id: "key-epic5",     name: "Epic Key x5",       price: "7.99",  blurb: "Five keys for the Epic crate." },
+      { id: "key-epic15",    name: "Epic Key x15",      price: "19.99", blurb: "Fifteen Epic keys, better value." },
+      { id: "key-legend3",   name: "Legendary Key x3",  price: "9.99",  blurb: "Three keys for the Legendary crate." },
+      { id: "key-legend10",  name: "Legendary Key x10", price: "24.99", blurb: "Ten Legendary keys, our best deal." } ] },
+    { id: "coins", name: "Coins", items: [
+      { id: "coins-1k",   name: "1,000 Coins",   price: "1.99",  blurb: "A small top-up." },
+      { id: "coins-5k",   name: "5,000 Coins",   price: "7.99",  blurb: "Enough to start trading on the market." },
+      { id: "coins-10k",  name: "10,000 Coins",  price: "14.99", blurb: "A solid stack of in-game currency." },
+      { id: "coins-25k",  name: "25,000 Coins",  price: "29.99", blurb: "Great for founding a company." },
+      { id: "coins-50k",  name: "50,000 Coins",  price: "54.99", blurb: "For serious market players." },
+      { id: "coins-100k", name: "100,000 Coins", price: "99.99", blurb: "The largest coin pack." } ] },
+    { id: "bundles", name: "Bundles", items: [
+      { id: "bundle-starter", name: "Starter Bundle", price: "14.99", blurb: "Keys and coins to get you moving." },
+      { id: "bundle-climber", name: "Climber Bundle", price: "29.99", blurb: "A bigger haul of keys and coins." },
+      { id: "bundle-summit",  name: "Summit Bundle",  price: "59.99", blurb: "Our biggest bundle of keys and coins." } ] }
   ]
 };

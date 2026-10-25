@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://store.everestmc.net/sitemap.xml

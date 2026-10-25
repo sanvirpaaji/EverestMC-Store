@@ -1,5 +1,5 @@
 # EverestMC Store (static, GitHub Pages)
-Files: `index.html`, `style.css`, `script.js`, `config.js` (edit this one), `logo.webp`, `favicon.png`, `data/companies.json`. Matches your repo's existing file names; keep your own `wrangler.toml` (and any CNAME).
+Pages: `index.html` (home), `ranks.html`, `store.html`, `market.html`, `faq.html`. Shared: `style.css`, `script.js`, `config.js` (edit this one), `logo.webp`, `favicon.png`, `robots.txt`, `sitemap.xml`, `wrangler.toml`, `.assetsignore`, `data/companies.json`.
 Preview the market layout with `?demo` on the URL. Keep your existing `CNAME` file in the repo.
 
 ## Easy edits (all in `config.js`)

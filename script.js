@@ -1,21 +1,58 @@
-const C = window.EVEREST, $ = s => document.querySelector(s);
+const C = window.EVEREST, $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
 const el = (t, txt, cls) => { const e = document.createElement(t); if (txt != null) e.textContent = txt; if (cls) e.className = cls; return e; };
 const money = n => new Intl.NumberFormat("en-US", { style: "currency", currency: C.currency }).format(n);
-$("#dc1").href = $("#dc2").href = C.discordUrl;
-
-/* ---------- Ranks + checkout ---------- */
+$$(".dc").forEach(a => a.href = C.discordUrl);
+$$(".delivery").forEach(e => e.textContent = C.deliveryNote);
 const dlg = $("#co"); let current = null, ppReady = null;
-C.ranks.forEach((r, i) => {
-  const c = el("div", null, "card reveal" + (r.soon ? " locked" : ""));
-  const top = el("div", null, "ctop"); top.append(el("span", String(i + 1).padStart(2, "0"), "num"), el("span", r.soon ? "COMING SOON" : "AVAILABLE", "tag"));
-  c.append(top, el("div", r.soon ? "?" : r.name[0], "badge"), el("h3", r.name), el("div", r.soon ? "Coming soon" : C.currencySymbol + r.price, "price"), el("p", r.blurb));
-  const ul = el("ul"); r.perks.forEach(p => ul.append(el("li", p))); c.append(ul);
-  const open = C.checkoutEnabled && !r.soon;
-  const b = el("button", open ? "Buy " + r.name : (r.soon ? "Locked" : "Checkout opening soon"), "btn");
-  if (open) b.onclick = () => openCheckout(r); else { b.disabled = true; b.style.opacity = ".45"; b.style.cursor = "not-allowed"; }
-  c.append(b);
-  $("#rankGrid").append(c);
-});
+
+/* ---------- Cards ---------- */
+const perksFor = i => C.features.filter(f => f.v[i]).map(f => f.v[i] === true ? f.name : f.name + ": " + f.v[i]);
+function card(r, i, ranked) {
+  const c = el("div", null, "card");
+  if (ranked) { const top = el("div", null, "ctop"); top.append(el("span", String(i + 1).padStart(2, "0"), "num"), el("span", "AVAILABLE", "tag")); c.append(top); }
+  c.append(el("h3", r.name), el("div", C.currencySymbol + r.price, "price"), el("p", r.blurb));
+  const perks = ranked ? perksFor(i) : [];
+  if (perks.length) { const ul = el("ul"); perks.forEach(p => ul.append(el("li", p))); c.append(ul); }
+  const b = el("button", C.checkoutEnabled ? "Buy " + r.name : "Checkout opening soon", "btn");
+  if (C.checkoutEnabled) b.onclick = () => openCheckout(r); else { b.disabled = true; b.style.opacity = ".45"; b.style.cursor = "not-allowed"; }
+  c.append(b); return c;
+}
+if ($("#rankGrid")) C.ranks.forEach((r, i) => { const c = card(r, i, true); c.classList.add("reveal"); $("#rankGrid").append(c); });
+if ($("#rankPreview")) C.ranks.forEach(r => { const a = el("a", null, "chip"); a.href = "ranks.html"; a.append(el("b", r.name), el("span", C.currencySymbol + r.price)); $("#rankPreview").append(a); });
+if ($("#cmp")) {
+  const t = $("#cmp"), hr = el("tr"); hr.append(el("th", "Feature")); C.ranks.forEach(r => hr.append(el("th", r.name))); t.createTHead().append(hr);
+  const tb = t.createTBody();
+  C.features.forEach(f => { const tr = el("tr"); tr.append(el("td", f.name)); f.v.forEach(v => tr.append(el("td", v === true ? "\u2713" : v === false ? "\u2013" : v, v === true ? "yes" : v === false ? "no" : ""))); tb.append(tr); });
+  const pr = el("tr", null, "prow"); pr.append(el("td", "Price")); C.ranks.forEach(r => pr.append(el("td", C.currencySymbol + r.price))); tb.append(pr);
+}
+if ($("#tabs")) {
+  const tabs = $("#tabs");
+  const showCat = k => { $$(".tab").forEach((b, j) => b.classList.toggle("on", j === k)); $("#items").replaceChildren(...C.catalog[k].items.map(it => card(it, 0, false))); };
+  C.catalog.forEach((cat, k) => { const b = el("button", cat.name, "tab"); b.onclick = () => { showCat(k); history.replaceState(null, "", "#" + cat.id); }; tabs.append(b); });
+  showCat(Math.max(0, C.catalog.findIndex(c => c.id === location.hash.slice(1))));
+}
+
+/* ---------- Server IPs (Java + Eaglercraft) + status ---------- */
+function copyText(t, btn) {
+  const done = () => { const o = btn.textContent; btn.textContent = "Copied!"; setTimeout(() => btn.textContent = o, 1800); };
+  if (navigator.clipboard) navigator.clipboard.writeText(t).then(done, fallback); else fallback();
+  function fallback() { const x = document.createElement("textarea"); x.value = t; document.body.append(x); x.select(); document.execCommand("copy"); x.remove(); done(); }
+}
+$$(".ips").forEach(box => [["Java", C.javaIp, C.javaNote], ["Eaglercraft", C.eaglerIp, C.eaglerNote]].forEach(([label, ip, note]) => {
+  if (!ip) return;
+  const row = el("div", null, "ipbox"), b = el("button", "Copy", "btn sm"); b.onclick = () => copyText(ip, b);
+  const lb = el("span", label, "iplabel"); if (note) lb.append(el("small", note)); row.append(lb, el("code", ip), b); box.append(row);
+}));
+async function loadStatus() {
+  try {
+    const d = await (await fetch("https://api.mcstatus.io/v2/status/java/" + encodeURIComponent(C.javaIp))).json();
+    $$(".players").forEach(e => e.textContent = d.online ? d.players.online + " / " + d.players.max + " online" : "Server offline");
+    $$(".pdot").forEach(e => e.className = "dot pdot " + (d.online ? "live" : "off"));
+  } catch { $$(".players").forEach(e => e.textContent = ""); }
+}
+if (C.javaIp) { loadStatus(); setInterval(loadStatus, 60000); }
+
+/* ---------- Checkout ---------- */
 const validName = () => /^[A-Za-z0-9_]{3,16}$/.test($("#user").value.trim());
 function loadPayPal() {
   if (ppReady) return ppReady;
@@ -83,8 +120,8 @@ function render(data, live, updated) {
     rows.append(tr);
   });
 }
-loadMarket(); setInterval(loadMarket, 30000);
+if ($("#rows")) { loadMarket(); setInterval(loadMarket, 30000); }
 
 /* ---------- Scroll reveal ---------- */
 const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .12 });
-document.querySelectorAll(".reveal").forEach(e => io.observe(e));
+$$(".reveal").forEach(e => io.observe(e));
