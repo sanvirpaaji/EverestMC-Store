@@ -2,7 +2,7 @@
  // ===== EDIT ME =====
 window.EVEREST = {
   // Set to true ONLY after you have a PayPal account and have filled in paypalClientId (or paypalMe) below.
-  checkoutEnabled: false,
+  checkoutEnabled: true,
   siteName: "EVERESTMC",
   discordUrl: "https://discord.everestmc.net/", // your invite link
 
@@ -24,13 +24,6 @@ window.EVEREST = {
       price: "29.99",
       blurb: "Rise above the rest and claim your place among the elite.",
       perks: ["Elite tag & basic features"]
-    },
-    {
-      id: "prestige",
-      name: "Prestige",
-      price: "39.99",
-      blurb: "A symbol of dedication, status, and achievement.",
-      perks: ["Prestige tag & moderate features", "Everything in Elite"]
     },
     {
       id: "immortal",
